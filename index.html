@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
 </head>
 <body>
-<span data-bind="text: firstName"></span>
+  <div class="container">  
+    <input type="text" class="input-big" data-bind="value: firstName" >
+    <input type="text" class="input-big" data-bind="value: lastName" >
+    <span data-bind="text: fullName" ></span>
+  </div>
 </body>
 </html>
