@@ -1,16 +1,25 @@
+var my = my || {};
 (function($){
 
-  $(function(){
+    $(function(){
 
-    var nameViewModel = function(){
-      this.firstName = ko.observable("Lars");
-      this.lastName = ko.observable("Bolvig");
-      this.fullName = ko.computed(function(){
-        return this.firstName() + " " +this.lastName();
-      }, this);
-    };
-    ko.applyBindings(new nameViewModel());
+        // Viewmodel using the revealing module pattern and namespacing
+        my.customViewModel = function(){
+            var
+                firstName = ko.observable("Lars"),
+                lastName = ko.observable("Bolvig"),
+                fullName = ko.computed(function(){
+                    return firstName() + " " +lastName();
+                });
+            return {
+                firstName: firstName,
+                lastName: lastName,
+                fullName: fullName
+            };
+        } ();
+        
+        ko.applyBindings(my.customViewModel);
 
-  });
+    });
 
 })(jQuery);
