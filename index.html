@@ -1,17 +1,57 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">  
   <title>Knockout JS Sandbox</title>
-  <script src="js/lib/jquery-1.10.2.min.js"></script>
-  <script src="js/lib/knockout-3.0.0.debug.js"></script>
-  <script src="js/script.js"></script>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/to-do.css">
 </head>
-<body>
-  <div class="container">  
-    <input type="text" class="input-big" data-bind="value: firstName" >
-    <input type="text" class="input-big" data-bind="value: lastName" >
-    <span data-bind="text: fullName" ></span>
-  </div>
-</body>
+  <body>
+    <section id="todoapp" >
+      <header id="header">
+        <h1>todos</h1>
+        <input id="new-todo" placeholder="What needs to be done?">
+      </header>
+      <section id="main">
+        <input id="toggle-all" type="checkbox">
+        <label for="toggle-all">Mark all as complete</label>
+        <ul id="todo-list">
+          <li>
+            <div class="view">
+              <input class="toggle" type="checkbox">
+              <label><!-- TO DO TITLE --></label>
+              <button class="destroy"></button>
+            </div>
+            <form >
+              <input class="edit">
+            </form>
+          </li>
+        </ul>
+      </section>
+      <footer id="footer">
+        <span id="todo-count"><strong> <!-- REMAINING TO DOS --></strong>
+        </span>
+        <ul id="filters">
+          <li>
+            <a href="#/">All</a>
+          </li>
+          <li>
+            <a href="#/active">Active</a>
+          </li>
+          <li>
+            <a href="#/completed">Completed</a>
+          </li>
+        </ul>
+        <button id="clear-completed" >Clear completed <!-- NUMBER OF COMPLETED TO DOS --></button>
+      </footer>
+    </section>
+    <footer id="info">
+      <p>Double-click to edit a todo</p>
+    </footer>
+
+    <script src="js/lib/jquery-1.10.2.min.js"></script>
+    <script src="js/lib/knockout-3.0.0.debug.js"></script>
+    <script src="js/script.js"></script>
+  </body>
 </html>
