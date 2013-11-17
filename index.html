@@ -11,17 +11,20 @@
     <section id="todoapp" >
       <header id="header">
         <h1>todos</h1>
-        <input id="new-todo" placeholder="What needs to be done?">
+        <form data-bind="submit: my.toDoViewModel.addItem">
+          <input id="new-todo" placeholder="What needs to be done?" data-bind="value: my.toDoViewModel.itemInputText, valueUpdate: 'afterkeydown'">
+          <!-- <input type="submit" value="Add"> -->
+        </form> 
       </header>
-      <section id="main">
+      <section id="main" data-bind="visible: my.toDoViewModel.toDoList().length > 0">
         <input id="toggle-all" type="checkbox">
         <label for="toggle-all">Mark all as complete</label>
-        <ul id="todo-list">
+        <ul id="todo-list" data-bind="foreach: { data: my.toDoViewModel.toDoList, as: 'toDoItem' }">
           <li>
             <div class="view">
-              <input class="toggle" type="checkbox">
-              <label><!-- TO DO TITLE --></label>
-              <button class="destroy"></button>
+              <input class="toggle" type="checkbox" >
+              <label data-bind="text: toDoItem.toDoItemText"></label>
+              <button class="destroy" data-bind="click: my.toDoViewModel.removeToDo"></button>
             </div>
             <form >
               <input class="edit">
@@ -29,8 +32,8 @@
           </li>
         </ul>
       </section>
-      <footer id="footer">
-        <span id="todo-count"><strong> <!-- REMAINING TO DOS --></strong>
+      <footer id="footer" data-bind="visible: my.toDoViewModel.toDoList().length > 0">
+        <span id="todo-count"><strong data-bind="text: my.toDoViewModel.itemsLeft()"> <!-- REMAINING TO DOS --></strong>
         </span>
         <ul id="filters">
           <li>
@@ -49,8 +52,7 @@
     <footer id="info">
       <p>Double-click to edit a todo</p>
     </footer>
-
-    <script src="js/lib/jquery-1.10.2.min.js"></script>
+    <script src="js/lib/jquery-1.11.0.js"></script>
     <script src="js/lib/knockout-3.0.0.debug.js"></script>
     <script src="js/script.js"></script>
   </body>

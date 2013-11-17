@@ -553,3 +553,9 @@ hr {
     margin: 130px auto 40px auto;
   }
 }
+
+
+
+#header input[type="submit"] {
+  display:none;
+}

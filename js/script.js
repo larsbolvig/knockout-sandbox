@@ -1,25 +1,39 @@
 var my = my || {};
-(function($){
 
-    $(function(){
+$(function(){
 
-        // Viewmodel using the revealing module pattern and namespacing
-        my.customViewModel = function(){
-            var
-                firstName = ko.observable("Lars"),
-                lastName = ko.observable("Bolvig"),
-                fullName = ko.computed(function(){
-                    return firstName() + " " +lastName();
-                });
-            return {
-                firstName: firstName,
-                lastName: lastName,
-                fullName: fullName
+    // ToDoItem constructor
+    my.ToDoItem = function () {
+        var self = this;
+        self.toDoItemText = ko.observable();
+        self.completed = ko.observable(false); // default value
+    };
+
+    my.toDoViewModel = function(){
+        var
+            itemInputText = ko.observable(),
+            toDoList = ko.observableArray([]),
+            itemsLeft = ko.computed(function(){
+                return toDoList().length > 1 ? toDoList().length+" items left" : toDoList().length+" item left";
+            }),
+            addItem = function() {
+                toDoList.push(
+                    new my.ToDoItem()
+                    .toDoItemText(itemInputText())
+                );
+                itemInputText("");
+            },
+            removeToDo = function(todo){
+                toDoList.remove(todo);
             };
-        } ();
-        
-        ko.applyBindings(my.customViewModel);
+        return {
+            itemInputText: itemInputText,
+            itemsLeft: itemsLeft,
+            toDoList: toDoList,
+            addItem: addItem,
+            removeToDo: removeToDo
+        };
+    } ();
 
-    });
-
-})(jQuery);
+    ko.applyBindings(my.toDoViewModel);
+});
