@@ -554,8 +554,7 @@ hr {
   }
 }
 
-
-
-#header input[type="submit"] {
-  display:none;
+.view.completed {
+  color: #cdcdcd;
+  text-decoration: line-through;
 }

@@ -19,11 +19,13 @@
       <section id="main" data-bind="visible: my.toDoViewModel.toDoList().length > 0">
         <input id="toggle-all" type="checkbox">
         <label for="toggle-all">Mark all as complete</label>
-        <ul id="todo-list" data-bind="foreach: { data: my.toDoViewModel.toDoList, as: 'toDoItem' }">
+
+        <ul id="todo-list" data-bind="foreach: { data: my.toDoViewModel.toDoList(), as: 'toDoItem' }">
           <li>
-            <div class="view">
-              <input class="toggle" type="checkbox" >
+            <div class="view" data-bind="css: { completed: toDoItem.completed }" >
+              <input class="toggle" type="checkbox" data-bind="checked: toDoItem.completed">
               <label data-bind="text: toDoItem.toDoItemText"></label>
+              <span data-bind="text: toDoItem.completed"></span>
               <button class="destroy" data-bind="click: my.toDoViewModel.removeToDo"></button>
             </div>
             <form >
@@ -53,6 +55,7 @@
       <p>Double-click to edit a todo</p>
     </footer>
     <script src="js/lib/jquery-1.11.0.js"></script>
+    <script src="js/lib/underscore.js"></script>
     <script src="js/lib/knockout-3.0.0.debug.js"></script>
     <script src="js/script.js"></script>
   </body>

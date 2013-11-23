@@ -13,6 +13,20 @@ $(function(){
         var
             itemInputText = ko.observable(),
             toDoList = ko.observableArray([]),
+            completedToDoList = ko.computed(function(){
+                return _.filter(toDoList(), function(todo){
+                    if (todo.completed()) {
+                        return todo;
+                    }
+                });
+            }),
+            inCompletedToDoList = ko.computed(function(){
+                return _.filter(toDoList(), function(todo){
+                    if (!todo.completed()) {
+                        return todo;
+                    }
+                });
+            }),
             itemsLeft = ko.computed(function(){
                 return toDoList().length > 1 ? toDoList().length+" items left" : toDoList().length+" item left";
             }),
@@ -31,9 +45,13 @@ $(function(){
             itemsLeft: itemsLeft,
             toDoList: toDoList,
             addItem: addItem,
-            removeToDo: removeToDo
+            removeToDo: removeToDo,
+            completedToDoList: completedToDoList,
+            inCompletedToDoList: inCompletedToDoList
         };
     } ();
 
+
     ko.applyBindings(my.toDoViewModel);
+
 });
