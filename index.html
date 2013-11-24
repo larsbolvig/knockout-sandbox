@@ -35,7 +35,7 @@
         </ul>
       </section>
       <footer id="footer" data-bind="visible: my.toDoViewModel.toDoList().length > 0">
-        <span id="todo-count"><strong data-bind="text: my.toDoViewModel.itemsLeft()"> <!-- REMAINING TO DOS --></strong>
+        <span id="todo-count"><strong data-bind="text: my.toDoViewModel.itemsLeft()"></strong>
         </span>
         <ul id="filters">
           <li>
@@ -48,7 +48,7 @@
             <a href="#/completed">Completed</a>
           </li>
         </ul>
-        <button id="clear-completed" data-bind="visible: my.toDoViewModel.completedToDoList().length > 0">
+        <button id="clear-completed" data-bind="visible: my.toDoViewModel.completedToDoList().length > 0, click: my.toDoViewModel.removeCompletedTodos()">
           Clear completed (<span data-bind="text: my.toDoViewModel.completedToDoList().length"></span>)
         </button>
       </footer>

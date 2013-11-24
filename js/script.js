@@ -1,9 +1,9 @@
 var my = my || {};
 
-$(function(){
+$(function() {
 
     // ToDoItem constructor
-    my.ToDoItem = function () {
+    my.ToDoItem = function() {
         var self = this;
         self.toDoItemText = ko.observable();
         self.completed = ko.observable(false); // default value
@@ -13,22 +13,23 @@ $(function(){
         var
             itemInputText = ko.observable(),
             toDoList = ko.observableArray([]),
-            completedToDoList = ko.computed(function(){
-                return _.filter(toDoList(), function(todo){
+            completedToDoList = ko.computed(function() {
+                return _.filter(toDoList(), function(todo) {
                     if (todo.completed()) {
                         return todo;
                     }
                 });
             }),
-            inCompletedToDoList = ko.computed(function(){
-                return _.filter(toDoList(), function(todo){
+            inCompletedToDoList = ko.computed(function() {
+                return _.filter(toDoList(), function(todo) {
                     if (!todo.completed()) {
                         return todo;
                     }
                 });
             }),
-            itemsLeft = ko.computed(function(){
-                return inCompletedToDoList().length === 1 ? inCompletedToDoList().length+" item left" : inCompletedToDoList().length+" items left";
+            itemsLeft = ko.computed(function() {
+                var numberOfIncompleteToDos = inCompletedToDoList().length;
+                return numberOfIncompleteToDos === 1 ? numberOfIncompleteToDos+" item left" : numberOfIncompleteToDos+" items left";
             }),
             addItem = function() {
                 toDoList.push(
@@ -37,8 +38,11 @@ $(function(){
                 );
                 itemInputText("");
             },
-            removeToDo = function(todo){
+            removeToDo = function(todo) {
                 toDoList.remove(todo);
+            },
+            removeCompletedTodos = function() {
+                toDoList.removeAll(completedToDoList());
             };
         return {
             itemInputText: itemInputText,
@@ -47,10 +51,10 @@ $(function(){
             addItem: addItem,
             removeToDo: removeToDo,
             completedToDoList: completedToDoList,
-            inCompletedToDoList: inCompletedToDoList
+            inCompletedToDoList: inCompletedToDoList,
+            removeCompletedTodos: removeCompletedTodos
         };
     } ();
-
 
     ko.applyBindings(my.toDoViewModel);
 
