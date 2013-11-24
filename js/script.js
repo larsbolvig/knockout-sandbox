@@ -28,7 +28,7 @@ $(function(){
                 });
             }),
             itemsLeft = ko.computed(function(){
-                return toDoList().length > 1 ? toDoList().length+" items left" : toDoList().length+" item left";
+                return inCompletedToDoList().length === 1 ? inCompletedToDoList().length+" item left" : inCompletedToDoList().length+" items left";
             }),
             addItem = function() {
                 toDoList.push(

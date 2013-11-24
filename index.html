@@ -48,7 +48,9 @@
             <a href="#/completed">Completed</a>
           </li>
         </ul>
-        <button id="clear-completed" >Clear completed <!-- NUMBER OF COMPLETED TO DOS --></button>
+        <button id="clear-completed" data-bind="visible: my.toDoViewModel.completedToDoList().length > 0">
+          Clear completed (<span data-bind="text: my.toDoViewModel.completedToDoList().length"></span>)
+        </button>
       </footer>
     </section>
     <footer id="info">
